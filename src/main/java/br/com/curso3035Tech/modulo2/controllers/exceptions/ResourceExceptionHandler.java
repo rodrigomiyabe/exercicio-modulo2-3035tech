@@ -18,7 +18,7 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Resource not found");
+		err.setError("Resource already exists");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
@@ -30,7 +30,7 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Resource not found");
+		err.setError("Resource already exists");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
@@ -61,6 +61,17 @@ public class ResourceExceptionHandler {
 	}
 
 
+	@ExceptionHandler(EntityAlreadyExists.class)
+	public ResponseEntity<StandardError> entityAlreadyExists(DatabaseException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.CONFLICT;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Entidade já existe!");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
 
 }
 

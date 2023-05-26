@@ -27,9 +27,13 @@ public class PacienteController {
     public ResponseEntity<List<PacienteDTO>>listaMedicos(){
         return ResponseEntity.ok().body(service.listaTodosPacientes());
     }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PacienteDTO> findById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.findById(id));
+    }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PacienteDTO>updateMedico(@PathVariable Integer id, @RequestBody PacienteDTO dto){
+    public ResponseEntity<PacienteDTO>updatePaciente(@PathVariable Integer id, @RequestBody PacienteDTO dto){
         return ResponseEntity.ok().body(service.atualizaPaciente(id,dto));
     }
 

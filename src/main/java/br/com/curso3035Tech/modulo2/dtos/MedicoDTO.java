@@ -27,4 +27,7 @@ public class MedicoDTO implements Serializable {
         this.especialidade = medico.getEspecialidade();
     }
 
+    public static MedicoDTO of (Medico medico){
+        return (medico == null) ? null : new MedicoDTO(medico);
+    }
 }
