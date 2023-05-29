@@ -22,7 +22,6 @@ public class PacienteService {
 
     @Transactional
     public PacienteDTO insereNovoPaciente(@Valid PacienteDTO pacienteDTO){
-
         if(repository.findByCpf(pacienteDTO.getCpf()).isPresent()){
             throw new CpfExistenteException("CPF EXISTENTE!" );
         } else if (repository.findByEmail(pacienteDTO.getEmail()).isPresent()) {
@@ -31,7 +30,7 @@ public class PacienteService {
             throw new EntityAlreadyExists("PACIENTE EXISTENTE!");
         } else{
             Paciente novoPaciente = new Paciente();
-            BeanUtils.copyProperties(pacienteDTO,novoPaciente);
+            BeanUtils.copyProperties(pacienteDTO, novoPaciente);
             repository.save(novoPaciente);
             return new PacienteDTO(novoPaciente);
         }
@@ -65,12 +64,6 @@ public class PacienteService {
     @Transactional
     public void deletaPaciente(Integer id) {
         this.repository.deleteById(this.repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entidade nao encontrada!")).getCodPaciente());
-    }
-
-
-    @Transactional(readOnly = true)
-    public Boolean pacienteExists(Integer id){
-        return this.repository.existsById(id);
     }
 
     public Paciente findEntity(Integer id){
