@@ -1,13 +1,13 @@
 package br.com.curso3035Tech.modulo2.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
-
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,9 +29,7 @@ public class Paciente implements Serializable {
     @Column(name = "dataNascimento",nullable = false)
     private Date dataNascimento;
     @Column(name = "cpf",nullable = false)
-    @CPF(message = "CPF inválido!")
     private String cpf;
     @Column(name = "email",nullable = false)
-    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 }

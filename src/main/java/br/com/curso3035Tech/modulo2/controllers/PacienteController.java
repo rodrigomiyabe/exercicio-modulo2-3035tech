@@ -2,6 +2,7 @@ package br.com.curso3035Tech.modulo2.controllers;
 
 import br.com.curso3035Tech.modulo2.dtos.PacienteDTO;
 import br.com.curso3035Tech.modulo2.services.PacienteService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,7 +19,7 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<PacienteDTO> inserePaciente(@RequestBody PacienteDTO dto){
+    public ResponseEntity<PacienteDTO> inserePaciente(@RequestBody @Valid PacienteDTO dto){
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(dto.getCodPaciente()).toUri();
         return ResponseEntity.created(uri).body(service.insereNovoPaciente(dto));
     }

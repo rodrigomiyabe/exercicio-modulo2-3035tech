@@ -21,7 +21,7 @@ public class PacienteService {
     }
 
     @Transactional
-    public PacienteDTO insereNovoPaciente(@Valid PacienteDTO pacienteDTO){
+    public PacienteDTO insereNovoPaciente(PacienteDTO pacienteDTO){
         if(repository.findByCpf(pacienteDTO.getCpf()).isPresent()){
             throw new CpfExistenteException("CPF EXISTENTE!" );
         } else if (repository.findByEmail(pacienteDTO.getEmail()).isPresent()) {
